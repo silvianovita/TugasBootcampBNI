@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Employee</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form th:object="${employee}" th:action="@{saveEmployee}" method="POST">
+            Id       : <input type="text" th:field="*{id}" />
+            <br/>
+            Name     : <input type="text" th:field="*{name}" />
+            <br/>
+            Department : <input type="text" th:field="*{department.id}"/>
+            <input type="submit" value="Save" name="Save" />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>Employee Name</th>
+                        <th>Department Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tbody>
+                    <tr th:each="as : ${employees}">
+                        <td th:text="${as.id}"></td>
+                        <td th:text="${as.name}"></td>
+                        <td th:text="${as.department.name}"></td>
+                        <td>
+                            <form th:action="@{delete}" method="post">
+                                <input type="hidden" name="id" th:value="${as.id}" />
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </body>
+</html>
